@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recados Usuario</title>
+  </head>
+  <body>
+    <main>
+      <form>
+        <fieldset>
+          <legend><h1>Criar Recados</h1></legend>
+
+          <label for="titulo"><b>Titulo</b></label>
+          <input type="text" name="titulo" id="titulo" required />
+
+          <br />
+          <br />
+
+          <label for="descricao"><b>Descricao</b></label>
+          <br />
+          <br />
+
+          <textarea
+            name="descricao"
+            id="descricao"
+            cols="30"
+            rows="10"
+          ></textarea>
+
+          <input type="submit" id="enviar" name="enviar" />
+        </fieldset>
+        <br />
+        <br />
+        <br />
+        <fieldset>
+          <legend><h1>Atualizar Recados</h1></legend>
+
+          <fieldset>         
+              <button type="button"
+              id="atualizarRecados"><b>Atualizar Recados </b></button>
+              <br/>
+              <br/>
+            <label for="atualizarRecados">Veja seu recado aqui!!!</label>      
+        </fieldset>
+        <br />
+        <br />
+        <fieldset>
+          <legend><h1>Deletar Recaddos</h1></legend>
+            <input type="email" name="emailDeletado" id="emailDeletado">
+          
+        </fieldset>
+      </form>
+    </main>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="api.js"></script>
+  <script src="index.js"></script>
+</html>

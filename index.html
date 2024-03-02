@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividade integracao de Login</title>
+  </head>
+  <body>
+    <form id="loginUsuario">
+      <fieldset>
+        <legend><h1>Login Usuario</h1></legend>
+
+        <label for="email"><b>Email</b></label>
+        <input
+          type="email"
+          nome="email"
+          id="email"
+          placeholder="bananinha@bol.com"
+          required
+        />
+
+        <label for="password"><b>Senha</b></label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          autocomplete="off"
+          minlength="4"
+          required
+        />
+
+        <button type="submit" onclick="login(event)">Login</button>
+        <label for="respostaLogin" id="respostaLogin"></label>
+      </fieldset>
+      <br />
+
+      <br />
+    </form>
+
+    <form id="cadastrarUsuario">
+      <fieldset>
+        <legend><h1>Cadastrar Usuario</h1></legend>
+
+        <label for="criarNome"><h4>Nome</h4></label>
+        <input type="text" name="nome" id="criarNome" required />
+
+        <label for="criarEmail"><h4>Email</h4></label>
+        <input type="email" id="criarEmail" name="criarEmail" required />
+
+        <label for="criarSenha"><h4>Senha</h4></label>
+        <input type="number" id="criarSenha" name="criarSenha" required />
+        <br />
+        <br />
+        <button type="submit" id="cadastrar" onclick="criarUsuario(event)">
+          <h5>Cadastre-se</h5>
+        </button>
+        <div id="usuarioCriado"></div>
+      </fieldset>
+    </form>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="api.js"></script>
+  <script src="index.js"></script>
+</html>
