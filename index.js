@@ -5,7 +5,7 @@ async function login(event) {
   try {
     const email = document.getElementById("email").value;
     const senha = document.getElementById("password").value;
-
+    const nome = document.getElementById("nome").value;
     const data = {
       email: email,
       senha: senha,
@@ -21,9 +21,10 @@ async function login(event) {
 
     localStorage.removeItem("formularioEnviado");
 
-    respostaLogin.innerHTML = ` <h1>Login efetuado com sucesso, ${email} !!!</h1>`;
-
     localStorage.setItem("userEmail", email);
+    localStorage.setItem("nomeUsuario", nome);
+
+    respostaLogin.innerHTML = ` <h1>Login efetuado com sucesso, ${nome} !!!</h1>`;
     window.location.href = "./recados.html";
   } catch (error) {
     alert("Email ou Senha incorretos, verifique se voce esta cadastrado !!!");
@@ -61,13 +62,24 @@ async function criarUsuario(event) {
   }
 }
 
-//////////////---USUARIO  QUE ESTA LOGADO (ONLINE) ---////////////////
+////////////---USUARIO  QUE ESTA LOGADO (ONLINE) ---////////////////
+function verificarstatus(event) {
+  event.preventDefault();
+  try {
+    const userName = localStorage.getItem("nomeUsuario");
+    const emailLogado = localStorage.getItem("userEmail");
+    const usuarioLogado = document.getElementById("usuarioLogado");
 
-const emailLogado = document.getElementById("usuarioLogado");
-const email = localStorage.getItem("userEmail");
+    if (emailLogado) {
+      usuarioLogado.innerHTML = `<h1>Seja Bem Vind ${userName} Voce esta Logado!!!</h1>`;
 
-emailLogado.innerText = "seja bem vindo";
-
+      usuarioLogado.style.backgroundColor = "lightblue";
+      usuarioLogado.style.textAlign = "center";
+    } else {
+      window.location.href = "./index.html";
+    }
+  } catch (error) {}
+}
 //////////////---CRIAR RECADO DO USUARIO QUE ESTA LOGADO ---////////////////
 
 let contador = 1;
@@ -103,4 +115,39 @@ async function criarRecados(event) {
   }
 }
 
-//////////////// DEPOIS CRIAR ENDPOINT DE DELETAR USUARIO OU  RECADO POR PARAMETRO        ///////////////////////
+//////////////// Atualizar recados - Listar Recados    ///////////////////////
+
+async function atualizarRecados(event) {
+  event.preventDefault();
+  try {
+    const emailParametro = document.getElementById("parametroEmail").value;
+    const response = await api.get(`recados/${emailParametro}`);
+    const mostrarRecados = response.data.data;
+
+    const recadoDiv = document.getElementById("atualizarRecados");
+
+    mostrarRecados.forEach((message) => {
+      const msgRecado = document.createElement("div");
+      msgRecado.innerHTML = `<p> Email: ${message.email}</p><p> ID: ${message.id}</p><p> Titulo: ${message.titulo}</p><p> Mensagem: ${message.descricao}</p>`;
+
+      recadoDiv.appendChild(msgRecado);
+    });
+  } catch (error) {
+    console.log("VAMOS DEBUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR ");
+  }
+}
+
+//////////////////////DELETAR USUARIO ///////////////////////////////////
+
+async function deletarUsuario(event) {
+  event.preventDefault();
+  try {
+    const emailDeletado = document.getElementById("emailDeletado").value;
+    const response = await api.delete(`usuario/delete/${emailDeletado}`);
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("nomeUsuario");
+    alert("VOCE DELETOU SEU USUARIO!!!!");
+  } catch (error) {
+    alert("VAMOOOOOOOOO DEBUGARRRRRRRRRRRRR");
+  }
+}

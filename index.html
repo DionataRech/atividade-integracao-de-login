@@ -6,16 +6,27 @@
     <title>Atividade integracao de Login</title>
   </head>
   <body>
-    <form id="loginUsuario">
+    <form id="loginUsuario" onsubmit="login(event)">
       <fieldset>
         <legend><h1>Login Usuario</h1></legend>
+
+        <label for="nome">Nome</label>
+        <input
+          type="text"
+          name="nome"
+          id="nome"
+          placeholder="Ex..pitanguinha"
+          autocomplete="off"
+          required
+        />
 
         <label for="email"><b>Email</b></label>
         <input
           type="email"
           nome="email"
           id="email"
-          placeholder="bananinha@bol.com"
+          placeholder="Ex..@gmail.com"
+          autocomplete="off"
           required
         />
 
@@ -26,26 +37,42 @@
           id="password"
           autocomplete="off"
           minlength="4"
+          autocomplete="off"
           required
         />
 
-        <button type="submit" oncsubmit="login(event)">Login</button>
-        <label for="respostaLogin" id="respostaLogin"></label>
+        <button type="submit">Login</button>
+
+        <div id="respostaLogin"></div>
       </fieldset>
       <br />
 
       <br />
     </form>
 
-    <form id="cadastrarUsuario">
+    <form id="cadastrarUsuario" onsubmit="criarUsuario(event)">
       <fieldset>
         <legend><h1>Cadastrar Usuario</h1></legend>
 
         <label for="criarNome"><h4>Nome</h4></label>
-        <input type="text" name="nome" id="criarNome" required />
+        <input
+          type="text"
+          name="nome"
+          id="criarNome"
+          placeholder="Ex..PirlJans"
+          autocomplete="off"
+          required
+        />
 
         <label for="criarEmail"><h4>Email</h4></label>
-        <input type="name" id="criarEmail" name="criarEmail" required />
+        <input
+          type="email"
+          id="criarEmail"
+          name="criarEmail"
+          autocomplete="off"
+          placeholder="Ex..@gmail.com"
+          required
+        />
 
         <label for="criarSenha"><h4>Senha</h4></label>
         <input
@@ -57,9 +84,10 @@
         />
         <br />
         <br />
-        <button type="submit" id="cadastrar" onsubmit="criarUsuario(event)">
+        <button type="submit">
           <h5>Cadastre-se</h5>
         </button>
+
         <div id="usuarioCriado"></div>
       </fieldset>
     </form>

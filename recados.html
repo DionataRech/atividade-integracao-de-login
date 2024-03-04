@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recados Usuario</title>
   </head>
-  <body>
+  <body onload="verificarstatus(event)">
     <main>
-      <div id="usuarioLogado"></div>
-      <form>
+      <div id="usuarioLogado" ></div>
+
+      <form onsubmit="criarRecados(event)">
         <fieldset>
           <legend><h1>Criar Recados</h1></legend>
 
@@ -29,30 +30,50 @@
           rows="10"
           ></textarea>
           
-          <input type="submit" name="criarRecados" onclick="criarRecados(event)" />
+          <input type="submit" />
           <div id="mostrarRecados"></div>
         </fieldset>
         <br />
         <br />
         <br />
         <fieldset>
+       </form>
+        <form onsubmit="atualizarRecados(event)">
           <legend><h1>Atualizar Recados</h1></legend>
 
-          <fieldset>         
-              <button type="button"
-              id="atualizarRecados"><b>Atualizar Recados </b></button>
-              <br/>
-              <br/>
-            <label for="atualizarRecados">Veja seu recado aqui!!!</label>      
-        </fieldset>
+           <fieldset>         
+             <label for="parametroEmail">Email</label>
+               <input type="email"
+               name="parametroEmail"
+               id="parametroEmail"
+               placeholder="Ex..@gmail.com"
+               autocomplete="off"
+               required
+               >       
+               <input type="submit">       
+             <div id="atualizarRecados">Veja seu recado aqui!!!</div>      
+          </fieldset>
+        </form>
+
         <br />
         <br />
-        <fieldset>
-          <legend><h1>Deletar Recaddos</h1></legend>
-            <!-- <input type="email" name="emailDeletado" id="emailDeletado"> -->
-          
-        </fieldset>
-      </form>
+
+        <form onsubmit="deletarUsuario(event)">
+         <fieldset>
+           <legend><h1>Para deletar seu Usuario digite seu Email</h1></legend>
+           <label for="deletarEmail">Email</label>
+             <input type="email"
+             id="emailDeletado"
+             name="parametroEmail"
+             id="parametroEmail"
+             placeholder="Ex..@gmail.com"
+             autocomplete="off"
+             required
+             >       
+
+             <button type="submit">DELETAR</button>
+         </fieldset>
+        </form>
     </main>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
