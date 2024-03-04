@@ -7,6 +7,7 @@
   </head>
   <body>
     <main>
+      <div id="usuarioLogado"></div>
       <form>
         <fieldset>
           <legend><h1>Criar Recados</h1></legend>
@@ -20,15 +21,16 @@
           <label for="descricao"><b>Descricao</b></label>
           <br />
           <br />
-
+          
           <textarea
-            name="descricao"
-            id="descricao"
-            cols="30"
-            rows="10"
+          name="descricao"
+          id="descricao"
+          cols="30"
+          rows="10"
           ></textarea>
-
-          <input type="submit" id="enviar" name="enviar" />
+          
+          <input type="submit" name="criarRecados" onclick="criarRecados(event)" />
+          <div id="mostrarRecados"></div>
         </fieldset>
         <br />
         <br />
@@ -47,7 +49,7 @@
         <br />
         <fieldset>
           <legend><h1>Deletar Recaddos</h1></legend>
-            <input type="email" name="emailDeletado" id="emailDeletado">
+            <!-- <input type="email" name="emailDeletado" id="emailDeletado"> -->
           
         </fieldset>
       </form>

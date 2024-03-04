@@ -1,3 +1,5 @@
+//////////////---LOGIN USUARIO---////////////////
+
 async function login(event) {
   event.preventDefault();
   try {
@@ -17,20 +19,18 @@ async function login(event) {
 
     const respostaLogin = document.getElementById("respostaLogin");
 
-    respostaLogin.innerHTML = ` <h1>Seja Bem vindo ${email} </h1>`;
+    localStorage.removeItem("formularioEnviado");
+
+    respostaLogin.innerHTML = ` <h1>Login efetuado com sucesso, ${email} !!!</h1>`;
+
+    localStorage.setItem("userEmail", email);
+    window.location.href = "./recados.html";
   } catch (error) {
-    alert("Email nao cadastrado !!!");
+    alert("Email ou Senha incorretos, verifique se voce esta cadastrado !!!");
   }
 }
 
-////////////////PRECISO FAZER A FUNCAO DE LINK DE UMA PAGINA PARA A OUTRA /////////// BOTAO LOGIN PARA A PAGINA DE RECADOS ////////////////////////////
-
-///////////////NOS RECADOS APARECER QUEM ESTA LOGADO (CONSULTAR LOCALSOTRAGE)E APARECER ID DE  USUARIO /////////////////////////
-
-//////////////CONSTRUIR ENDPOINT DE CRIAR RECADOS E ATUALIZAR RECADOS  POR PARAMETROS     ////////////////////////////////////
-
-//////////////// DEPOIS CRIAR ENDPOINT DE DELETAR USUARIO OU  RECADO POR PARAMETRO        ///////////////////////
-
+//////////////---CRIAR USUARIO---////////////////
 async function criarUsuario(event) {
   event.preventDefault();
 
@@ -39,14 +39,11 @@ async function criarUsuario(event) {
     const email = document.getElementById("criarEmail").value;
     const senha = document.getElementById("criarSenha").value;
 
-    console.log(nome, email, senha, "Aqui estao os dados do primeiro filtro");
-
     const data = {
       nome: nome,
       email: email,
       senha: senha,
     };
-    console.log(data, "Aqui estao os dados do segundo filtro");
 
     localStorage.setItem("novoUsuario", JSON.stringify(data));
 
@@ -54,10 +51,56 @@ async function criarUsuario(event) {
 
     const response = await api.post("/usuarios", salvarDados);
 
-    const usuariocriado = document.getElementById("usuarioCriado");
+    const usuarioCriado = document.getElementById("usuarioCriado");
 
-    usuariocriado.innerHTML = `<b> Usuario ${data.nome} criado com sucesso </b>`;
+    localStorage.removeItem("novoUsuario");
+
+    usuarioCriado.textContent = ` Seja Bem vindo ${email} `;
   } catch (error) {
     alert("Error , preencha os campos obrigatorios");
   }
 }
+
+//////////////---USUARIO  QUE ESTA LOGADO (ONLINE) ---////////////////
+
+const emailLogado = document.getElementById("usuarioLogado");
+const email = localStorage.getItem("userEmail");
+
+emailLogado.innerText = "seja bem vindo";
+
+//////////////---CRIAR RECADO DO USUARIO QUE ESTA LOGADO ---////////////////
+
+let contador = 1;
+
+async function criarRecados(event) {
+  event.preventDefault();
+
+  try {
+    const titulo = document.getElementById("titulo").value;
+    const descricao = document.getElementById("descricao").value;
+    const emailLocal = localStorage.getItem("userEmail");
+
+    const dadosRecado = {
+      id: contador,
+      email: emailLocal,
+      titulo: titulo,
+      descricao: descricao,
+    };
+
+    localStorage.setItem("novoRecado", JSON.stringify(dadosRecado));
+    const recadosSalvos = JSON.parse(localStorage.getItem("novoRecado"));
+    contador++;
+
+    const response = await api.post(
+      `criarRecados/${emailLocal}`,
+      recadosSalvos
+    );
+
+    const mostrarRecado = document.getElementById("mostrarRecados");
+    mostrarRecado.innerHTML = `Seu recado  foi criado com Sucesso`;
+  } catch (error) {
+    alert("Opa meu bom Deu algum erro ae , VAMOS DEBUGAR!!!");
+  }
+}
+
+//////////////// DEPOIS CRIAR ENDPOINT DE DELETAR USUARIO OU  RECADO POR PARAMETRO        ///////////////////////

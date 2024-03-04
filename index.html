@@ -29,7 +29,7 @@
           required
         />
 
-        <button type="submit" onclick="login(event)">Login</button>
+        <button type="submit" oncsubmit="login(event)">Login</button>
         <label for="respostaLogin" id="respostaLogin"></label>
       </fieldset>
       <br />
@@ -45,13 +45,19 @@
         <input type="text" name="nome" id="criarNome" required />
 
         <label for="criarEmail"><h4>Email</h4></label>
-        <input type="email" id="criarEmail" name="criarEmail" required />
+        <input type="name" id="criarEmail" name="criarEmail" required />
 
         <label for="criarSenha"><h4>Senha</h4></label>
-        <input type="number" id="criarSenha" name="criarSenha" required />
+        <input
+          type="password"
+          id="criarSenha"
+          name="criarSenha"
+          required
+          autocomplete="off"
+        />
         <br />
         <br />
-        <button type="submit" id="cadastrar" onclick="criarUsuario(event)">
+        <button type="submit" id="cadastrar" onsubmit="criarUsuario(event)">
           <h5>Cadastre-se</h5>
         </button>
         <div id="usuarioCriado"></div>
